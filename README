@@ -1,0 +1,19 @@
+140cms is a Twitter driven CMS.
+See it in action at jamus.co.uk
+---------------------------------
+
+_Installation
+Simply install files on server.
+Ensure includes/functions.php has write permissions
+
+_Updating Tweets
+Set up a Cron job of your server to load includes/functions.php
+
+
+To do
+-------------
+
+Clean out unnecessary comments.
+Add themes.
+jquery add ons (E.g. create links from @usernames and www.addresses in bio/description)
+Make the HTML much nicer!
