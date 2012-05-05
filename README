@@ -17,3 +17,8 @@ Clean out unnecessary comments.
 Add themes.
 jquery add ons (E.g. create links from @usernames and www.addresses in bio/description)
 Make the HTML much nicer!
+
+Notes
+-------------
+@johnnye Has built a Ruby version here:
+https://github.com/johnnye/tweetCMS
