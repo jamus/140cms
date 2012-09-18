@@ -2,18 +2,12 @@
 
 /// general setup  - Change optiosn below to suit
 
-$twitteruser = 'jamusreynolds';
-$keywords = array("inspiration", "learning", "work", "life");
-
-
-?>
-
-<?php
+	include ('config.php');
 
 /// Get tweets
 
 foreach ($keywords as &$keyword) {
-   echo $keyword ;
+   echo "Getting Tweets for ".$keyword."\n" ;
    
    $request_one = "http://search.twitter.com/search.atom?q=from%3A".$twitteruser."+%23".$keyword;
 	$q = urlencode("twitter");
@@ -127,14 +121,6 @@ foreach ($keywords as &$keyword) {
 		}
 		
 }
-
-
-
-
-
-?>
-
-<?php
 
 /// Get stats & bio
 
