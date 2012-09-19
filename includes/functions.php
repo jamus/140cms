@@ -100,7 +100,8 @@ foreach ($keywords as &$keyword) {
 						<a href="http://twitter.com/#!/'.$twitteruser.'/statuses/'.$tweetcontents_id.'" target="_blank" >
 						<time datetime="'. $tweet_year .'.'. $tweet_month .'.'. $tweet_day .' '.$tweet_time.'">
 						'. $tweet_day .'.'. $tweet_month .'.'. $tweet_year .'</time>
-							<span > at '.$tweet_time.'</span></a>';
+							<span > at '.$tweet_time.'</span></a>
+							</article>';
 		}
 		
 		// echo $tweetcontents . "<br><br>";
