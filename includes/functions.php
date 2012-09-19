@@ -7,7 +7,7 @@
 /// Get tweets
 
 foreach ($keywords as &$keyword) {
-   echo "Getting Tweets for ".$keyword."\n" ;
+   echo "<p><strong>Getting Tweets for #".$keyword."</strong><br>" ;
    
    $request_one = "http://search.twitter.com/search.atom?q=from%3A".$twitteruser."+%23".$keyword;
 	$q = urlencode("twitter");
@@ -57,7 +57,7 @@ foreach ($keywords as &$keyword) {
 				$array = explode ( ' ' , $published_time ) ; // This will split $string by the space character ' '
 				$tweet_date = $array[0] ; // date e.g 2010-10-01 
 				
-				echo $tweet_date . "<br>";
+				
 				
 				// format date the way we want
 				$tweet_year = substr($tweet_date, 0, -6);
@@ -109,15 +109,16 @@ foreach ($keywords as &$keyword) {
 		if ($id) {
 			
 			//echo "We got one! =";
-			echo "tweet_".$keyword.".php";
+			//echo "tweet_".$keyword.".php";
 					$handle=fopen("tweet_".$keyword.".php","w") or die("cannot open tweet_".$keyword.".php");
 					if(fwrite($handle,$tweetcontents,strlen($tweetcontents)))
-					  echo "tweet_".$keyword.".php updated<br>\n";
+					echo "Found one dated " . $tweet_date . "</p>";
 					fclose($handle);
 				
 			
 		} else {
-			//echo "no recent matching tweet so we'll keep the old one.";
+			echo "No <strong>recent</strong> matching tweet to update with.
+			<br>If your just setting things up you'll need to tweet using this hash before it'll show up!";
 		}
 		
 }
@@ -189,7 +190,7 @@ $bio.='<h1>'.$name.'</h1>
 
 		$handle=fopen("bio.php","w") or die("cannot open header.php");
 		if(fwrite($handle,$bio,strlen($bio)))
-		  echo "bio updated<br>\n";
+		  echo "<p><strong>Bio updated</strong></p>";
 		fclose($handle);
 
 
@@ -212,12 +213,14 @@ $stats.='
 
 		$handle=fopen("stats.php","w") or die("cannot open stats.php");
 		if(fwrite($handle,$stats,strlen($stats)))
-		  echo "stats updated<br>\n";
+		  echo "<p><strong>Stats updated</strong></p>";
 		fclose($handle);
 
 
 
-/////////////// FOOTER 
+/////////////// DONE LINK TO VIEW
+
+	echo '<a href="../">Ok. You\'re all set - Click here to view your 140cms page.</a>'; 
 
 
 ?>

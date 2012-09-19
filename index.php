@@ -16,11 +16,12 @@
 			if (file_exists($filename)) {
 				include($filename);
 			} else {
-				echo "Can't find a tweet hash tagged ".$keyword."";
+				echo '<article class="error"><h2>UH OH!</h2>
+					<p>No Tweet with <strong>#'.$keyword.'</strong> found!</p>';
 			}
 		}
 	}else{
-		echo "If you have just installed this. You'll need to visit <a href='". $_SERVER['REQUEST_URI']."/includes/functions.php'>this page</a> to prime the page with your tweets.";
+		echo "If you have just installed this. You'll need to visit <a href='". $_SERVER['REQUEST_URI']."includes/functions.php'>this page</a> to prime the page with your tweets.";
 	}
 	
 	 ?>
