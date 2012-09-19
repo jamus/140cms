@@ -174,8 +174,8 @@ $listed_count = (string)$xml->listed_count;
 
 
 $profile_image_url = (string)$xml->profile_image_url;
-// take of the normal size - bigger.JPG added below
-$profile_image_url = substr($profile_image_url, 0, -10);
+// strip off the normal size string - "_bigger.JPG" to get the full size image.
+$profile_image_url = substr($profile_image_url, 0, -11);
 
 
 
@@ -185,7 +185,7 @@ $name = (string)$xml->name;
 $bio.='<h1>'.$name.'</h1>
 		<h2><a href="http://twitter.com/#!/'.$twitteruser.'" target="_blank">@'.$twitteruser.'</a></h2>
 		<p>' . $description . '</p>
-		<img src="'.$profile_image_url.'reasonably_small.JPG" alt="'.$name.'" width="60px" />';
+		<img src="'.$profile_image_url.'.JPG" alt="'.$name.'" width="60px" />';
 
 //echo $bio;
 
