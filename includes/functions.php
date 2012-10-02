@@ -1,5 +1,8 @@
  <?php
 
+
+
+
 /// Functions required for formatting etc
  // 
 
@@ -40,29 +43,41 @@ if(!function_exists(timeBetween))
 		if($hours > 1){$year = false; $month = false; $days = false; $hours = $hours.' hours'; $minutes = false; $seconds = false;}
 		if($hours == 1){$year = false; $month = false; $year = false; $month = false; $days = false; $hours = $hours.' hour'; $minutes = false; $seconds = false;}
 		if($minutes > 1){$days = false; $hours = false; $minutes = $minutes.' minutes'; $seconds = false;}
-		//if($hours > 0){$hours = $hours.' hours, ';}
-		//else{$hours = false;}
-		//if($minutes > 0){$minutes = $minutes.' minutes, ';}
-		//else{$minutes = false;}
-		//$seconds = $seconds.' seconds'; // always be at least one second
-		//else {days = false; $hours = false; $minutes = false; $seconds = false;}
+		
 
 		return $year . '' .$month . '' .$days.''.$hours.''.$minutes.''.$seconds . ' ago';
 	}
 }
 
+function insert_links($tweet) {
+
+	$URLpattern = "@\b(https?://)?(([0-9a-zA-Z_!~*'().&=+$%-]+:)?[0-9a-zA-Z_!~*'().&=+$%-]+\@)?(([0-9]{1,3}\.){3}[0-9]{1,3}|([0-9a-zA-Z_!~*'()-]+\.)*([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]\.[a-zA-Z]{2,6})(:[0-9]{1,4})?((/[0-9a-zA-Z_!~*'().;?:\@&=+$,%#-]+)*/?)@";
+	$tweet = preg_replace($URLpattern, '<a href="\0" target="_blank">\0</a>', $tweet);
+
+
+
+	return $tweet;
+}
 
 function create_tags($tweet) {
 
-	
     preg_match_all('/#\S*\w/i', $tweet, $tags);
     
     $taglist = "";
 	foreach( $tags[0] as $tag ) {
-                $taglist .= '<li>'. $tag .'</li>';
+				global $twitteruser;
+                $taglist .= '<li><a href="https://twitter.com/i/#!/search/%23'. $tag .'%20from%3A'.$twitteruser.'--" target="_blank">'. $tag .'</a></li>';
                 }
-    //echo $taglist;
+
+    $taglist = preg_replace('/#([\w-]+)/i', '$1', $taglist); // remove #'s'
+         
 	return $taglist;
+}
+
+function remove_hashes($tweet) {
+
+	$tweet = rtrim( preg_replace('/#[^\s]+\s?/', '', $tweet) );
+	return $tweet;
 }
 
 

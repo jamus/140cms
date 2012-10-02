@@ -2,10 +2,10 @@
 
 <?php
 
-/// general setup
+/// general setup  - Change options below to suit
 
 $twitteruser = 'jamusreynolds';
-$keywords = array("inspiration", "learning", "work", "life");
+$keywords = array("random", "learning", "work", "inspiration");
 
 
 ?>

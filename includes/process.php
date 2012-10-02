@@ -1,6 +1,6 @@
 <?php
 
-/// general setup  - Change optiosn below to suit
+
 
 	include ('config.php');
 	include ('functions.php');
@@ -122,8 +122,10 @@ foreach ($keywords as &$keyword) {
     				
     				$tweet = $decode[$i][text];
 
-    				$tags = create_tags($tweet);
+    				$tweet = insert_links($tweet);
 
+    				$tags = create_tags($tweet); // include if you wish to use hashtags as "tags"
+    				$tweet = remove_hashes($tweet); // include if you wish for hash tags to be removed from tweets
 					
     			
     				//remove <b> and </b> from the tweet. If you want to show bold keyword then you can comment this line

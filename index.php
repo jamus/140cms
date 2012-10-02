@@ -3,9 +3,11 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	
+	<meta name="description" content="Personal profile page of Web design and developer Jamus.">
+	<meta name="author" content="jamus@jamus.co.uk">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="stylesheet" href="css/bass.css">
 </head>
 
 <body>
@@ -27,7 +29,7 @@
 			}
 		}
 	}else{
-		echo "If you have just installed this. You'll need to visit <a href='". $_SERVER['REQUEST_URI']."includes/functions.php'>this page</a> to prime the page with your tweets.";
+		echo "If you have just installed this. You'll need to visit <a href='". $_SERVER['REQUEST_URI']."includes/process.php'>this page</a> to prime the page with your tweets.";
 	}
 	
 	 ?>
