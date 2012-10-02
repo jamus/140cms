@@ -7,10 +7,10 @@ See it in action at jamus.co.uk
 
 _Installation
 Simply install files on server.
-Ensure includes/functions.php has write permissions
+Ensure includes/process.php has write permissions
 
 _Updating Tweets
-Set up a Cron job of your server to load includes/functions.php
+Set up a Cron job of your server to load includes/process.php
 
 
 To do
