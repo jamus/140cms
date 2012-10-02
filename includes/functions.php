@@ -9,6 +9,9 @@
 
 $json = file_get_contents("http://api.twitter.com/1/statuses/user_timeline.json?screen_name=".$twitteruser."&count=50", true); //getting the file content
 $decode = json_decode($json, true); //getting the file content as array
+
+$timestamp = time();
+echo "time now: " . $timestamp;
  
 /// Get stats & bio
 $name = $decode[0][user][name];
@@ -16,6 +19,10 @@ $name = $decode[0][user][name];
 $description = $decode[0][user][description];
 $location = $decode[0][user][location];
 $url = $decode[0][user][url];
+$created_at = $decode[0][user][created_at];
+	// format date the way we want for credit
+	$created_year = strftime("%Y",strtotime($created_at));
+
 
 
 $followers_count = $decode[0][user][followers_count];
@@ -25,24 +32,19 @@ $listed_count = $decode[0][user][listed_count];
 
 $profile_image_url = $decode[0][user][profile_image_url];
 
-$timestamp = date('m.d.Y h:i:s a', time());
+
 
 $bio='';
 $stats='';
-$footer='';
+$credits='';
 
 
-
-// strip off the normal size string - "_bigger.JPG" to get the full size image.
-$profile_image_url = substr($profile_image_url, 0, -11);
-
+/////////////// BIO
 
 
 $bio.='<h1>'.$name.'</h1>
 		<h2><a href="http://twitter.com/#!/'.$twitteruser.'" target="_blank">@'.$twitteruser.'</a></h2>
-		<p>' . $description . '</p>
-		<p>' . $location . '</p>
-		<img src="'.$profile_image_url.'.JPG" alt="'.$name.'" width="60px" />';
+		<p>' . $description . '</p>';
 
 //echo $bio;
 
@@ -74,7 +76,24 @@ $stats.='
 		  echo "<p><strong>Stats updated</strong></p>";
 		fclose($handle);
 
-/// Get tweets
+
+
+/////////////// CREDITS 
+
+
+$credits.='<p>© ' . $created_year . ' - ' . date('Y', time()) . ' ' .$name.'</p>
+		<p>' . $location . '</p>';
+
+//echo $credits;
+
+		$handle=fopen("credits.php","w") or die("cannot open header.php");
+		if(fwrite($handle,$credits,strlen($credits)))
+		  echo "<p><strong>Credits updated</strong></p>";
+		fclose($handle);
+
+
+
+/////////////// TWEETS
 
 foreach ($keywords as &$keyword) {
 	 echo "<p><strong>Getting Tweets for #".$keyword."</strong><br>" ;
@@ -85,18 +104,21 @@ foreach ($keywords as &$keyword) {
     			//echo $decode[$i][text]."<br>";
     				//get the id from entry
 					$id = $decode[$i][id];
-					echo $id;
+					//echo $id;
 					
     				$tweet_date = $decode[$i][created_at];  
-					// format date the way we want
-					$tweet_year = substr($tweet_date, 0, -6);
-					$tweet_month = substr($tweet_date, 5, -3);
-					$tweet_day = substr($tweet_date, -2);
-				
-					// $tweet_time = 
-					
-				
-					$current_time = urlEncode(date("Y-m-d")."T".date("H:i:s")."Z"); 
+    				
+    				//// calculate time difference
+    				echo '$tweet_date: ' . $tweet_date . '<br>';
+    				$tweet_stamp = strtotime($tweet_date);
+    				echo '$tweet_stamp:' . $tweet_stamp . "<br><br>";
+
+
+    				echo '$timestamp: ' . $timestamp . '<br>';
+    				echo strtotime($timestamp), "<br><br>";
+    				
+    				$diff = ($timestamp - $tweet_date);
+    				echo "difference: " . $diff;
     				
     				
     				$tweet = $decode[$i][text];
@@ -114,17 +136,15 @@ foreach ($keywords as &$keyword) {
 					$tweet = str_replace(array("<a"), "<a target=\"_blank\"", $tweet);
 					
 					//the result div that holds the information
-					$tweetcontents ='<article class="'.$keyword.'"><h2>'.$keyword.'</h2>
+					$tweetcontents ='<article class="'.$keyword.' cols_2"><h2>'.$keyword.'</h2>
 					<p >'. $tweet .'</p>
-						<a href="http://twitter.com/#!/'.$twitteruser.'/statuses/'.$tweetcontents_id.'" target="_blank" >
-						<time datetime="'. $tweet_year .'.'. $tweet_month .'.'. $tweet_day .' '.$tweet_time.'">
-						'. $tweet_day .'.'. $tweet_month .'.'. $tweet_year .'</time>
-							<span > at '.$tweet_time.'</span></a>
+						<a href="http://twitter.com/#!/'.$twitteruser.'/statuses/'.$id.'" target="_blank" >
+						' . $tweet_date . '</a>
 							</article>';
 							
 					$handle=fopen("tweet_".$keyword.".php","w") or die("cannot open tweet_".$keyword.".php");
 					if(fwrite($handle,$tweetcontents,strlen($tweetcontents)))
-					echo "Found one dated " . $tweet_date . "</p>";
+					//echo "Found one dated " . $tweet_date . "</p>";
 					fclose($handle);
     			
     				echo $tweetcontents;

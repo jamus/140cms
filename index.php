@@ -2,11 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta charset="utf-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
-	<?php include("includes/bio.php"); ?>
-	
+	<article class="container">
+		<header class="cols_3"><?php include("includes/bio.php"); ?>
+		</header>
+		<section class="cols_10">
 	<?php 
 	if(file_exists("includes/bio.php")){
 	foreach ($keywords as &$keyword) {
@@ -16,7 +22,7 @@
 			if (file_exists($filename)) {
 				include($filename);
 			} else {
-				echo '<article class="error"><h2>UH OH!</h2>
+				echo '<h2>UH OH!</h2>
 					<p>No Tweet with <strong>#'.$keyword.'</strong> found!</p>';
 			}
 		}
@@ -25,13 +31,17 @@
 	}
 	
 	 ?>
-	
+		<section>
 
 
+		<aside class="cols_10">
+			<?php include("includes/stats.php"); ?>
+		</aside>
 
-	<?php include("includes/stats.php"); ?>
+		<footer class="cols_10">
+			<?php include("includes/credits.php"); ?>
+		</footer>
 	
-	
-	
+	</article>
 </body>
 </html>
