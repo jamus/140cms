@@ -19,7 +19,8 @@ Add image support - maybe
 Separate function for bio data so can be inserted into index.php E.g. meta description / copyright
 Clean out unnecessary comments.
 Add themes.
-create links from @usernames and www.addresses in tweets
+create links from @usernames in tweets
+make full URL display rather than twitter shortened 
 create links from @usernames and www.addresses in bio/description
 Make the HTML much nicer!
 
