@@ -2,7 +2,7 @@
 
 Use assigned hash tags to assign tweets as content for your website.
 
-See it in action at jamus.co.uk
+See it in action at jamus.co.uk/140cms
 ---------------------------------
 
 _Installation
@@ -15,10 +15,12 @@ Set up a Cron job of your server to load includes/functions.php
 
 To do
 -------------
-
+Add image support - maybe
+Separate function for bio data so can be inserted into index.php E.g. meta description / copyright
 Clean out unnecessary comments.
 Add themes.
-jquery add ons (E.g. create links from @usernames and www.addresses in bio/description)
+create links from @usernames and www.addresses in tweets
+create links from @usernames and www.addresses in bio/description
 Make the HTML much nicer!
 
 Notes
